@@ -9,6 +9,10 @@ class TwoSpec extends FlatSpec with Matchers {
   private def ==(a: Int, b: Int): Boolean = a == b
   private def eq(a: String, b: String): Boolean = a == b
 
+
+  "isSorted" should "return true for only one element" in {
+    Two.isSorted(Array(1), >) shouldEqual true
+  }
   "isSorted" should "return false for descending" in {
     Two.isSorted(Array(1,2,3,4,5,6), >) shouldEqual false
   }
