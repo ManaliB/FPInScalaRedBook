@@ -53,10 +53,10 @@ object List extends App { // `List` companion object. Contains functions for cre
 
   //3.4
   def drop[A](ds: List[A], n: Int): List[A] = {
-      ds match {
-        case Nil => Nil
-        case x if(n <= 0) => x
-        case Cons(x, xs) => drop(xs, n-1)
+    ds match {
+      case Nil => Nil
+      case x if(n <= 0) => x
+      case Cons(x, xs) => drop(xs, n-1)
     }
   }
 
