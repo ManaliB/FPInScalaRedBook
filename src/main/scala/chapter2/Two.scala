@@ -4,7 +4,7 @@ import scala.annotation.tailrec
 
 object Two extends App {
 
-  def isSorted[A](as: Array[A], ordered: (A,A) => Boolean): Boolean = {
+  def isSorted[A](as: Array[A])(ordered: (A,A) => Boolean): Boolean = {
     @tailrec
     def loop(n: Int, acc:Boolean): Boolean = {
       if(!acc) false // Fail-fast

@@ -26,7 +26,7 @@ object List extends App { // `List` companion object. Contains functions for cre
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
 
-  // 3
+  // 3.1 (Answer = 3)
   val x = List(1, 2, 3, 4, 5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42
@@ -35,6 +35,7 @@ object List extends App { // `List` companion object. Contains functions for cre
     case _ => 101
   }
 
+  //3.2
   def tail[A](ds: List[A]): List[A] = {
     ds match {
       case Nil => throw new UnsupportedOperationException("tail of empty list")
@@ -42,6 +43,7 @@ object List extends App { // `List` companion object. Contains functions for cre
     }
   }
 
+  //3.3
   def setHead[A](x: A, ds: List[A]) = {
     ds match {
       case Nil => throw new UnsupportedOperationException("cannot set head of empty list")
@@ -49,6 +51,7 @@ object List extends App { // `List` companion object. Contains functions for cre
     }
   }
 
+  //3.4
   def drop[A](ds: List[A], n: Int): List[A] = {
       ds match {
         case Nil => Nil
@@ -57,8 +60,26 @@ object List extends App { // `List` companion object. Contains functions for cre
     }
   }
 
+  // 3.5
+  def dropWhile[A](ds: List[A], fn: A => Boolean): List[A] = {
+    ds match {
+      case Cons(x, xs) if(fn(x)) => dropWhile(xs, fn)
+      case _ => ds
+    }
+  }
+
+  def init[A](ds: List[A]): List[A] = {
+    ds match {
+      case Nil => Nil
+      case Cons(_, Nil) => Nil
+      case Cons(x, xs) =>  Cons(x, init(xs))
+    }
+  } // dangerous5
+
 
 }
+
+
 
 
 
