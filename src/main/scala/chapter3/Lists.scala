@@ -190,6 +190,24 @@ object List extends App { // `List` companion object. Contains functions for cre
   def removeOdd1(ds: List[Int]) = {
     filterWFlatMap(ds)(a => a % 2 == 0)
   }
+
+  // 3.22
+  def addListValues(ds: List[Int], ds1: List[Int]): List[Int] = {
+    (ds, ds1) match {
+      case (_, Nil) => Nil
+      case (Nil, _) => Nil
+      case (Cons(x,xs), Cons(y,ys)) => Cons(x + y, addListValues(xs, ys))
+    }
+  }
+
+  // 3.23
+  def zipWith[A, B, C](ds: List[A], ds1: List[B])(f: (A, B) => C): List[C] = {
+    (ds, ds1) match {
+      case (_, Nil) => Nil
+      case (Nil, _) => Nil
+      case (Cons(x,xs), Cons(y,ys)) => Cons(f(x, y), zipWith(xs, ys)(f))
+    }
+  }
 }
 
 

@@ -2,7 +2,7 @@ package chapter3
 
 import org.scalatest._
 
-class OneSpec extends FlatSpec with Matchers {
+class ListsSpec extends FlatSpec with Matchers {
 
   "drop" should "drop first 2 elements" in {
     List.drop(List(1,2,3,4,5), 2) shouldBe List(3,4,5)
@@ -126,5 +126,10 @@ class OneSpec extends FlatSpec with Matchers {
   // 3.21
   "removeOdd1" should "remove odd numbers" in {
     List.removeOdd1(List(1,2,3,4,5)) shouldBe List(2,4)
+  }
+
+  //3.22
+  "addListValues" should "add" in {
+    List.addListValues(List(1,2,3), List(4,5,6)) shouldBe List(5,7,9)
   }
 }
