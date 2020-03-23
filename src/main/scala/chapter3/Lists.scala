@@ -208,6 +208,16 @@ object List extends App { // `List` companion object. Contains functions for cre
       case (Cons(x,xs), Cons(y,ys)) => Cons(f(x, y), zipWith(xs, ys)(f))
     }
   }
+
+  // 3.24 : TODO: Make @tailrec
+  def hasSubsequence[A](ds: List[A], sub: List[A]): Boolean = {
+    (ds, sub) match {
+      case (Nil, Nil) => true
+      case (Nil, _) => false
+      case (_, Nil) => true
+      case (Cons(x, xs), Cons(s, ss)) => (s == xs) && hasSubsequence(xs, ss)
+    }
+  }
 }
 
 
