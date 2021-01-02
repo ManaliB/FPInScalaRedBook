@@ -209,13 +209,15 @@ object List extends App { // `List` companion object. Contains functions for cre
     }
   }
 
-  // 3.24 : TODO: Make @tailrec
-  def hasSubsequence[A](ds: List[A], sub: List[A]): Boolean = {
-    (ds, sub) match {
+  // 3.24
+  @tailrec
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = {
+    (sup, sub) match {
       case (Nil, Nil) => true
-      case (Nil, _) => false
-      case (_, Nil) => true
-      case (Cons(x, xs), Cons(s, ss)) => (s == xs) && hasSubsequence(xs, ss)
+      case (Cons(_, Nil), Nil) => true
+      case(Cons(x, xs), Cons(y, ys)) if (x == y) =>  hasSubsequence(xs, ys)
+      case(Cons(_, xs), _) => hasSubsequence(xs, sub)
+      case _ => false
     }
   }
 }

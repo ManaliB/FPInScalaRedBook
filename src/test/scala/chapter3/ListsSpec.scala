@@ -132,4 +132,22 @@ class ListsSpec extends FlatSpec with Matchers {
   "addListValues" should "add" in {
     List.addListValues(List(1,2,3), List(4,5,6)) shouldBe List(5,7,9)
   }
+
+  //3.24
+  "hasSubsequence" should "return true" in {
+    List.hasSubsequence(List(1,2,3), List(1,2)) shouldBe true
+    List.hasSubsequence(List(1,2,3), List(2,3)) shouldBe true
+    List.hasSubsequence(List(1,2,3,4), List(4)) shouldBe true
+    List.hasSubsequence(Nil, Nil) shouldBe true
+    List.hasSubsequence(List(1,2,3,4), Nil) shouldBe true
+  }
+
+  //3.24
+  "hasSubsequence" should "return false" in {
+    List.hasSubsequence(List(1,2,3), List(3,2,1,4)) shouldBe false
+    List.hasSubsequence(List(1,2,3), List(1,2,3,4)) shouldBe false
+    List.hasSubsequence(List(1,2,3), List(3,2,1)) shouldBe false
+    List.hasSubsequence(List(1,2,3), List(5,6)) shouldBe false
+    List.hasSubsequence(Nil, List(4)) shouldBe false
+  }
 }
