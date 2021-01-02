@@ -16,4 +16,23 @@ class TreeSpec extends FlatSpec with Matchers {
     Tree.maximum(Branch(Branch(Leaf(5), Leaf(17)), Leaf(-66))) shouldBe 17
   }
 
+
+  "depth" should "find the depth of a tree" in {
+    Tree.depth(Leaf(2)) shouldBe 1
+    Tree.depth(Branch(Leaf(4), Leaf(2))) shouldBe 2
+    Tree.depth(Branch(Leaf(-66), Branch(Leaf(5), Leaf(17)))) shouldBe 3
+    Tree.depth(Branch(Branch(Leaf(5), Leaf(17)), Leaf(-66))) shouldBe 3
+    Tree.depth(Branch(Branch(Branch(Leaf(55), Leaf(90)), Leaf(17)), Leaf(-66))) shouldBe 4
+  }
+
+
+
+  "map" should "multiply all elements in tree by 2" in {
+    Tree.map(Leaf(2))(_ * 2) shouldBe Leaf(4)
+    Tree.map(Branch(Leaf(4), Leaf(2)))(_ * 2) shouldBe Branch(Leaf(8), Leaf(4))
+    Tree.map(Branch(Leaf(-66), Branch(Leaf(5), Leaf(17))))(_ * 2) shouldBe Branch(Leaf(-132), Branch(Leaf(10), Leaf(34)))
+    Tree.map(Branch(Branch(Leaf(5), Leaf(17)), Leaf(-66)))(_ * 2) shouldBe Branch(Branch(Leaf(10), Leaf(34)), Leaf(-132))
+    Tree.map(Branch(Branch(Branch(Leaf(55), Leaf(0)), Leaf(17)), Leaf(-66)))(_ * 2) shouldBe Branch(Branch(Branch(Leaf(110), Leaf(0)), Leaf(34)), Leaf(-132))
+  }
+
 }
