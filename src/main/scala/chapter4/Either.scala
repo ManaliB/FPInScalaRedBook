@@ -3,7 +3,7 @@ package chapter4
 
 case class Right[+A](value: A) extends Either[Nothing, A]
 case class Left[+E](value: E) extends Either[E, Nothing]
-
+// 4.6
 trait Either[+E, +A] {
   def map[B](f: A => B): Either[E, B] = this match {
     case Right(a) => Right(f(a))
@@ -24,6 +24,9 @@ trait Either[+E, +A] {
     this.flatMap(aa => b.map(bb => f(aa, bb)))
 
 }
+
+
+// 4.7
 object Either{
 
   def sequence[E,A](es: List[Either[E, A]]): Either[E, List[A]] = {
