@@ -16,7 +16,7 @@ trait Either[+E, +A] {
   }
 
   def orElse[EE >: E, B >: A](b: => Either[EE, B]): Either[EE, B] = this match {
-    case Right(x) => x
+    case Right(x) => Right(x)
     case Left(_) => b
   }
 
