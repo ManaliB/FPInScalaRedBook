@@ -18,6 +18,21 @@ trait Stream[+A] {
     }
     go(this.uncons, Nil)
   }
+
+  // Fixme This gets results in reverse
+  def take(n: Int): Stream[A] = {
+    @tailrec
+    def go(uc: Stream[A], accUc: Stream[A], counter: Int): Stream[A] = {
+      if (uc.isEmpty || counter <= 0) {
+        accUc
+      } else {
+        go(uc.uncons.get._2, Stream.cons(uc.uncons.get._1, accUc), counter - 1)
+      }
+    }
+    go(this, Stream.empty, n)
+  }
+
+
 }
 object Stream {
   def empty[A]: Stream[A] = new Stream[A] {
