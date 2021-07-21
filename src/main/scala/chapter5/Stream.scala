@@ -6,7 +6,7 @@ trait Stream[+A] {
   def uncons: Option[(A, Stream[A])]
 
   def isEmpty: Boolean = uncons.isEmpty
-
+// 1
   def toList: List[A] = {
     @tailrec
     def go(uc: Option[(A, Stream[A])], acc: List[A]): List[A] = {
@@ -19,6 +19,7 @@ trait Stream[+A] {
     go(this.uncons, Nil)
   }
 
+  // 2
   // Fixme This gets results in reverse
   def take(n: Int): Stream[A] = {
     @tailrec
@@ -32,6 +33,22 @@ trait Stream[+A] {
     go(this, Stream.empty, n)
   }
 
+  // 3
+  def takeWhile(p: A => Boolean): Stream[A] = {
+    @tailrec
+    def go(uc: Stream[A], accUc: Stream[A]): Stream[A] = {
+      if (uc.isEmpty) {
+        accUc
+      } else if (p(uc.uncons.get._1)) {
+        go(uc.uncons.get._2, Stream.cons(uc.uncons.get._1, accUc))
+      }
+      else {
+        go(uc.uncons.get._2, accUc)
+      }
+    }
+
+    go(this, Stream.empty)
+  }
 
 }
 object Stream {
